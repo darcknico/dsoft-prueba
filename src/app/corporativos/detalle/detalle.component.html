@@ -1,0 +1,42 @@
+<section>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="card col-12 col-md-11">
+        <div class="card-content">
+          <div class="card-body" *ngIf="corporativo">
+            <ngb-tabset type="pills">
+              <ngb-tab>
+                <ng-template ngbTabTitle><i class="fa fa-file-o m-1"></i> Datos Generales</ng-template>
+                <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-2">
+                      <img class="img-thumbnail mr-1" src="{{ corporativo.S_LogoURL }}" alt="avatar" />
+                    </div>
+                    <div class="col-10 d-flex align-items-center">
+                      <h4>{{corporativo.S_NombreCorto}}</h4>
+                    </div>
+                  </div>
+                  <app-corporativos-detalle-datos [corporativo]="corporativo"></app-corporativos-detalle-datos>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle><i class="ft-users m-1"></i> Contactos</ng-template>
+                <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-2">
+                      <img class="img-thumbnail mr-1" src="{{ corporativo.S_LogoURL }}" alt="avatar" />
+                    </div>
+                    <div class="col-10 d-flex align-items-center">
+                      <h4>Contactos</h4>
+                    </div>
+                  </div>
+                  <app-corporativos-detalle-contactos [corporativo]="corporativo" (actualizar)="actualizar()"></app-corporativos-detalle-contactos>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

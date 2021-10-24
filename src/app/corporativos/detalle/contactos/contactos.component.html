@@ -1,0 +1,76 @@
+<ngx-datatable class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force" [headerHeight]="50"
+  [footerHeight]="50" rowHeight="auto" [limit]="limitRef" [rows]="contactos" [scrollbarH]="true">
+  <ngx-datatable-column name="NOMBRE"         prop="S_Nombre" ></ngx-datatable-column>
+  <ngx-datatable-column name="PUESTO"         prop="S_Puesto" ></ngx-datatable-column>
+  <ngx-datatable-column name="TELEFONO"       prop="N_TelefonoFijo" ></ngx-datatable-column>
+  <ngx-datatable-column name="CELULAR"        prop="N_TelefonoMovil" ></ngx-datatable-column>
+  <ngx-datatable-column name="EMAIL"          prop="S_Email" ></ngx-datatable-column>
+  <ngx-datatable-column name="OBSERVACIONES"  prop="S_Comentarios" ></ngx-datatable-column>
+  <ngx-datatable-column name="ACCIONES" [width]="50">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <i class="ft-check-circle m-1 text-scondary cursor-pointer" (click)="onClickEdit(row)" ngbTooltip="Editar"></i>
+      <i class="ft-trash m-1 text-scondary cursor-pointer" (click)="onClickDelete(row)" ngbTooltip="Eliminar"></i>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+<form [formGroup]="contactoForm">
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <div class="form-group">
+        <label for="S_Nombre">NOMBRE</label>
+        <input type="text" id="S_Nombre" class="form-control {{ (cf.S_Nombre.touched || cf.S_Nombre.dirty)?( cf.S_Nombre.invalid ?'is-invalid':'is-valid'):''}}" formControlName="S_Nombre" placeholder="NOMBRE" >
+        <div class="invalid-feedback" *ngIf="cf.S_Nombre.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="form-group">
+        <label for="S_Puesto">PUESTO</label>
+        <input type="text" id="S_Puesto" class="form-control" formControlName="S_Puesto" placeholder="PUESTO" [ngClass]="{ 'is-invalid': cf.S_Puesto.dirty && cf.S_Puesto.invalid, 'is-valid': cf.S_Puesto.dirty && !cf.S_Puesto.invalid }">
+        <div class="invalid-feedback" *ngIf="cf.S_Puesto.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <fieldset class="form-group">
+        <label for="S_Comentarios">COMENTARIO</label>
+        <input type="text" id="S_Comentarios" class="form-control" formControlName="S_Comentarios" placeholder="COMENTARIO" [ngClass]="{ 'is-invalid': cf.S_Comentarios.dirty && cf.S_Comentarios.invalid, 'is-valid': cf.S_Comentarios.dirty && !cf.S_Comentarios.invalid }">
+      </fieldset>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <fieldset class="form-group">
+        <label for="N_TelefonoFijo">TELEFONO FIJO</label>
+        <input type="number" id="N_TelefonoFijo" class="form-control" formControlName="N_TelefonoFijo" placeholder="TELEFONO FIJO" [ngClass]="{ 'is-invalid': cf.N_TelefonoFijo.dirty && cf.N_TelefonoFijo.invalid, 'is-valid': cf.N_TelefonoFijo.dirty && !cf.N_TelefonoFijo.invalid }">
+      </fieldset>
+    </div>
+    <div class="col-12 col-md-3">
+      <fieldset class="form-group">
+        <label for="N_TelefonoMovil">TELEFONO MOVIL</label>
+        <input type="number" id="N_TelefonoMovil" class="form-control" formControlName="N_TelefonoMovil" placeholder="TELEFONO MOVIL" [ngClass]="{ 'is-invalid': cf.N_TelefonoMovil.dirty && cf.N_TelefonoMovil.invalid, 'is-valid': cf.N_TelefonoMovil.dirty && !cf.N_TelefonoMovil.invalid }">
+      </fieldset>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="form-group">
+        <label for="S_Email">EMAIL</label>
+        <input type="email" id="S_Email" class="form-control {{ (cf.S_Email.touched || cf.S_Email.dirty)?( cf.S_Email.invalid ?'is-invalid':'is-valid'):''}}" formControlName="S_Email" placeholder="EMAIL" >
+        <div class="invalid-feedback" *ngIf="cf.S_Email.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 ">
+      <div class="form-group">
+        <label class="d-flex" for="">&nbsp;</label>
+        <button type="button" class="btn btn-secondary mr-1 mb-1" (click)="onSubmit()" [disabled]="isLoading">{{ isEdit?'ACTUALIZAR CONTACTO':'AGREGAR CONTACTO' }}</button>
+      </div>
+    </div>
+  </div>
+</form>

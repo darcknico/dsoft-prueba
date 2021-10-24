@@ -1,0 +1,65 @@
+<form [formGroup]="corporativoForm">
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <fieldset class="form-group">
+        <label for="S_NombreCorto">NOMBRE CORTO</label>
+        <input type="text" id="S_NombreCorto" class="form-control" formControlName="S_NombreCorto" placeholder="NOMBRE CORTO" [ngClass]="{ 'is-invalid': cf.S_NombreCorto.dirty && cf.S_NombreCorto.invalid, 'is-valid': cf.S_NombreCorto.dirty && !cf.S_NombreCorto.invalid }">
+        <div class="invalid-feedback" *ngIf="cf.S_NombreCorto.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-12 col-md-6">
+      <fieldset class="form-group">
+        <label for="S_NombreCompleto">NOMBRE COMPLETO</label>
+        <input type="text" id="S_NombreCompleto" class="form-control" formControlName="S_NombreCompleto" placeholder="NOMBRE COMPLETO" [ngClass]="{ 'is-invalid': cf.S_NombreCompleto.dirty && cf.S_NombreCompleto.invalid, 'is-valid': cf.S_NombreCompleto.dirty && !cf.S_NombreCompleto.invalid }">
+        <div class="invalid-feedback" *ngIf="cf.S_NombreCompleto.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="form-group">
+        <label for="S_Activo">STATUS</label>
+        <ng-select [items]="statusOptions" id="S_Activo" bindValue="id" bindLabel="name" placeholder="STATUS" formControlName="S_Activo">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <div class="form-group">
+        <label for="S_SystemUrl">FECHA DE INCORPORACIÓN</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="D_FechaIncorporacion" formControlName="D_FechaIncorporacion" ngbDatepicker
+            #D_FechaIncorporacion="ngbDatepicker">
+          <div class="input-group-append">
+            <div class="input-group-text" (click)="D_FechaIncorporacion.toggle()">
+              <i class="fa fa-calendar" style="cursor: pointer;"></i>
+            </div>
+          </div>
+        </div>
+        <div class="invalid-feedback" *ngIf="cf.D_FechaIncorporacion.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <fieldset class="form-group">
+        <label for="S_SystemUrl">URL DEL SISTEMA</label>
+        <input type="text" id="S_SystemUrl" class="form-control" formControlName="S_SystemUrl" placeholder="URL" [ngClass]="{ 'is-invalid': cf.S_SystemUrl.dirty && cf.S_SystemUrl.invalid, 'is-valid': cf.S_SystemUrl.dirty && !cf.S_SystemUrl.invalid }">
+        <div class="invalid-feedback" *ngIf="cf.S_SystemUrl.invalid">
+          <i class="ft-circle"></i>
+          <span>El campo es requerido.</span>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</form>
+<div class="card-footer float-right">
+  <button type="button" class="btn btn-secondary mr-1 mb-1" (click)="onClickRegresar()" [disabled]="isLoading">{{isEdit?'Cancelar':'Regresar'}}</button>
+  <button type="button" class="btn btn-primary mr-1 mb-1" (click)="onClickEditar()" [disabled]="isLoading">{{isEdit?'Guardar Cambios':'Editar'}}</button>
+</div>
